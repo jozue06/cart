@@ -1,2 +1,2 @@
 # cart
-Bus Mall Shopping Cart
+Bus Mall Shopping Cart Initial setup
