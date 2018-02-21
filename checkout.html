@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Finish Checkout</title>
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="checkout.css" />
+    <script src="checkout.js"></script>
+
+    <h1>Complete Checkout</h1>
+</head>
+<body>
+    <form>
+        <fieldset>
+        <legend>Mailing Details</legend>
+        <p>
+            <label id="name"> <strong>Enter your full name</strong>
+            <input type="text" name="full name" id="name">
+            </label>
+        </p>
+        <p>
+            <label id="addressline1"><strong>Address Line 1</strong>
+            <input type="text" name="full name" id="addressline1">
+            </label>
+        </p>
+        <p>
+            <label id="addressline2"><strong>Address Line 2</strong>
+            <input type="text" name="full name" id="addressline2">
+            </label>
+        </p>
+        <p>
+            <label id="city"><strong>City</strong>
+            <input type="text" name="full name" id="city">
+            </label>
+        </p>
+        <p>
+            <label id="zipcode"><strong>Zipcode</strong>
+            <input type="text" name="full name" id="zipcode">
+            </label>
+        </p>
+        <p>
+            <label id="phone"><strong>Phone Number</strong>
+            <input type="text" name="full name" id="phone">
+            </label>
+        </p>
+    </fieldset>
+    </form>
+
+
+
+<section>
+        <h2>Payment information</h2>
+        <p>
+          <label for="card">
+            <span>Card type:</span>
+          </label>
+          <select id="card" name="usercard">
+            <option value="visa">Visa</option>
+            <option value="mc">Mastercard</option>
+            <option value="amex">American Express</option>
+          </select>
+        </p>
+        <p>
+          <label for="number">
+            <span>Card number:</span>
+            <strong><abbr title="required">*</abbr></strong>
+          </label>
+          <input type="text" id="number" name="cardnumber">
+        </p>
+        <p>
+          <label for="date">
+            <span>Expiration date:</span>
+            <strong><abbr title="required">*</abbr></strong>
+            <em>formatted as mm/yy</em>
+          </label>
+          <input type="text" id="date" name="expiration" maxlength="16"><br>
+        </p>
+    </section>
+    <button id=processorder type="submit">PROCESS ORDER</button>
+</body>
+</html>
