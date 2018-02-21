@@ -1,156 +1,96 @@
 'use strict';
+var cartbtn = document.getElementById('btn'); //btn 
+var selection = document.getElementById('items');  //input
+var quantity = document.getElementById('quantity'); //tasks
 
-
-// var addCart = document.getElementById('btn'); //btn
-// var selection = document.getElementById('items'); //input
-// var quantity = document.getElementById('quantity'); //tasks
-// if(localStorage.list){
-//   var list = localStorage.list.split(',');
-// } else {
-//   var list = [];
-// }
-
-
-//global vars
-var btn = document.getElementById('btn');
-var selection = document.getElementById('items');
-// var tasks = document.getElementById('tasks');
-
-//conditional that asks is there a property currently on localStorage that is a list? Does it have a value equal to ''?
-//split will coerce it back into an array and get rid of the comma
-//else we will take out the comma and set up an empty array that we can fill
-
-if(localStorage.list) {
+if(localStorage.list){
   var list = localStorage.list.split(',');
 } else {
   var list = [];
 }
-
-
-// need cart item objects, or constructor and/or array(s)
-var allPictures = [];
-
-function Picture(name, filepath) {
-  this.name = name;
-  this.filepath = filepath;
-  allPictures.push(this.filepath);
-}
-function display() {
-  if (localStorage.pictures) {
-    allPictures = JSON.parse(localStorage.getItem('pictures'));
-    for(var i in allPictures) {
-      chartData[i] = allPictures[i].name;
-    }
-  } else{
-    // push images into constructor Picture
-    new Picture('Bag', 'images/bag.jpg');
-    new Picture('Banana', 'images/banana.jpg');
-    new Picture('Bathroom', 'images/bathroom.jpg');
-    new Picture('Boots', 'images/boots.jpg');
-    new Picture('Breakfast', 'images/breakfast.jpg');
-    new Picture('Bubblegum', 'images/bubblegum.jpg');
-    new Picture('Chair', 'images/chair.jpg');
-    new Picture('Cthulhu', 'images/cthulhu.jpg');
-    new Picture('Dog-duck', 'images/dog-duck.jpg');
-    new Picture('Dragon', 'images/dragon.jpg');
-    new Picture('Pen', 'images/pen.jpg');
-    new Picture('Pet-sweep', 'images/pet-sweep.jpg');
-    new Picture('Tauntaun', 'images/tauntaun.jpg');
-    new Picture('Unicorn', 'images/unicorn.jpg');
-    new Picture('USB', 'images/usb.gif');
-    new Picture('Water-can', 'images/water-can.jpg');
-    new Picture('Wine-glass', 'images/wine-glass.jpg');
-  }
-}
-
-var formEle = document.getElementById('entryForm');
-
-function eventListenFunction(event) {
-
-  event.preventDefault();
-
-  var newStoreName = event.target.storeLocal.value;
-  var newMin = parseInt(event.target.minInput.value);
-  var newMax = parseInt(event.target.maxInput.value);
-  var newAvg = parseFloat(event.target.avgInput.value);
-
-  if (!newStoreName || !newMin || !newMax || !newAvg) return alert('All Data Required');
-  for (var i = 0; i < storeArray.length; i++) {
-    if (newStoreName === storeArray[i].name) {
-      return alert('Store name already exists');
-    }
-  }
-
-  var newRow = newStoreName;
-  var newStore = new Stores(newStoreName, 8, newMin, newMax, newAvg, newRow);
-  newStore.randCookiesPerH();
-  storeArray[storeArray.length - 1].render();
-  footerRow();
-
-  event.target.storeLocal.value = null;
-  event.target.minInput.value = null;
-  event.target.maxInput.value = null;
-  event.target.avgInput.value = null;
-}
-
-formEle.addEventListener('submit', (eventListenFunction));
-
-function save() {
+// function productChoice(){
+//   document.getElementById('productList').classList.toggle('show');
+// }
+//save the state of our application
+//attach it to some sort of event listener
+//grab our list and push the value of what we type into localStorage
+//every time you add an item, your item will go to localStorage
+function save(){
   list.push(selection.value);
+  list.push(quantity.value);
   localStorage.list = list;
-  // meta data so you can see what is happening in action
-  console.log('list arr:', list);
-  console.log('localStorage list:', localStorage.list);
+  //meta data so you can see what is happening in action
+  console.log('list array: ', list);
+  console.log('localStorage list: ', localStorage.list);
 }
-
 //modularizing code
 //make naming conventions that are easy to read
-
-function create() {
-  var val = selection.value;
+function create(){
+  console.log(selection);
+  var selected = selection.selectedIndex.value;
+  var quantity = quantity.value;
+  // alert(selection.options[selection.selectedIndex].value);
   //creating the item so getting the value of the input
   var item = document.createElement('li');
+  var amount = document.createElement('li');
   //each individual item
-  //do what to the li? Put stuff in it that is coming from val
-  //in the past we've used innerHTML or text content..this is NEW
-  //.createTextNode will solve problems in the future trust me
-  //just appending child text specifically to just an element in memory. Putting nothing but text
-
-  item.appendChild(document.createTextNode(val));
-  //need to take our tasks which is our ul and append child with the added li we just created
-  //   tasks.appendChild(item);
-  //each time you press enter you get a new empty value to enter a new val
-  selection.value = '';
+  //put stuff in li that is coming from the val
+  //in the past, we have used innerHTML or textContent
+  //.createTextNode just appends child text specifically to just an element in memory.
+  item.appendChild(document.createTextNode(selected));
+  item.appendChild(document.createTextNode(quantity));
+  //need to take tasks(ul) and append child with added li
+  quantity.appendChild(item);
+  quantity.appendChild(amount);
+  //each time you press enter, get new empty value to enter
+  // selection.value = '';
 }
-//load it out of localStorage
-//if list has data in it, has a value it will run
-//will say truthy or falsey based on what is in it. You don't need === or !==
-
-// function load() {
-//   if(localStorage.list) {
-//     //set up an item so we can deal with our for loop
-//     //creating an arbitrary loop starting at zero and incrementing up through the array
-//     var item;
-//     for (var x = 0; x < list.length; x++) {
-//       item = document.createElement('li');
-//       //stuff text into the li
-//       //list to the x will have all of our text in it
-//       item.appendChild(document.createTextNode(list[x]));
-
-//       tasks.appendChild(item);
-//     }
-//   }
-// }
-
-//wrap a bunch of function calls and call them in one function
-//anytime we click on a button we call render
-
-function render() {
+function load(){
+  if(localStorage.list){
+    //set up item so we item so we can loop thorough
+    var item;
+    // var amount;
+    for (var x = 0; x < list.length; x++){
+      item = document.createElement('li');
+      // amount = document.createElement('li');
+      //stuff text into the li
+      item.appendChild(document.createTextNode(list[x] + list[x+1]));
+      // amount.appendChild(document.createTextNode(list[x]));
+      quantity.appendChild(item);
+      x++;
+    }
+  }
+}
+//wrap function calls and call them in one function
+function render(){
   save();
   create();
 }
-
-// load();
-
-btn.addEventListener('click', render);
-
+load();
+cartbtn.addEventListener('click', render);
+Product.all = [];
+function Product(name, filepath) {
+  this.name = name;
+  this.filepath = filepath;
+  Product.all.push(this);
+}
+function instantiateProducts(){
+  new Product('bag', 'img/bag.jpg');
+  new Product('banana', 'img/banana.jpg');
+  new Product('bathroom', 'img/bathroom.jpg');
+  new Product('boots', 'img/boots.jpg');
+  new Product('breakfast', 'img/breakfast.jpg');
+  new Product('bubblegum', 'img/bubblegum.jpg');
+  new Product('chair', 'img/chair.jpg');
+  new Product('cthulhu', 'img/cthulhu.jpg');
+  new Product('dog-duck', 'img/dog-duck.jpg');
+  new Product('dragon', 'img/dragon.jpg');
+  new Product('pen', 'img/pen.jpg');
+  new Product('pet-sweep', 'img/pet-sweep.jpg');
+  new Product('tauntaun', 'img/tauntaun.jpg');
+  new Product('unicorn', 'img/unicorn.jpg');
+  new Product('usb', 'img/usb.gif');
+  new Product('water-can', 'img/water-can.jpg');
+  new Product('wine-glass', 'img/wine-glass.jpg');
+}
+instantiateProducts();
