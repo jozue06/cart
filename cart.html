@@ -7,30 +7,48 @@
 </head>
 <body>
 <h1>Your Cart to Checkout</h1>
+<h2 id="entryForm">Select Product and Quantity</h2>
+
 <section id="dropdown">
 <div>
-<form>
-<select name="cars">
-<option value="bag">R2 D2 Bag</option>
-<option value="banana">Banana Slicer</option>
-<option value="bathroom">Ipad Holder</option>
-<option value="boots">Rainboots</option>
-<option value="breakfast">Morning Toaster</option>
-<option value="bubblegum">Meat Bubblegum</option>
-<option value="chair">Avant Garde Chair</option>
-<option value="cthulhu">Cthulhu!</option>
-<option value="dog-duck">Dog Duck Mask</option>
-<option value="dragon">Dragon Meat</option>
-<option value="pen">Pen Utensils</option>
-<option value="pet-sweep">Pet Sweep Shoes</option>
-<option value="tauntaun">Tauntaun Sleeping Bag</option>
-<option value="unicorn">Unicorn Meat</option>
-<option value="usb">USB Tentacle</option>
-<option value="water-can">Watering Can</option>
-<option value="wine-glass">Wine Glass</option>
+    <form>
+        <select name="items">
+        <option value="bag">R2 D2 Bag</option>
+        <option value="banana">Banana Slicer</option>
+        <option value="bathroom">Ipad Holder</option>
+        <option value="boots">Rainboots</option>
+        <option value="breakfast">Morning Toaster</option>
+        <option value="bubblegum">Meat Bubblegum</option>
+        <option value="chair">Avant Garde Chair</option>
+        <option value="cthulhu">Cthulhu!</option>
+        <option value="dog-duck">Dog Duck Mask</option>
+        <option value="dragon">Dragon Meat</option>
+        <option value="pen">Pen Utensils</option>
+        <option value="pet-sweep">Pet Sweep Shoes</option>
+        <option value="tauntaun">Tauntaun Sleeping Bag</option>
+        <option value="unicorn">Unicorn Meat</option>
+        <option value="usb">USB Tentacle</option>
+        <option value="water-can">Watering Can</option>
+        <option value="wine-glass">Wine Glass</option>
 </select>
 <br><br>
-<input type="submit">
+
+
+<select name="quantity">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+</select>
+
+<button type="submit" value="Add to Cart">Add to Cart</button>
+
+<button id= checkout type="submit" value="Continue Shopping">Continue Shopping</button>
+
+<button id= checkout formaction="checkout.html" type="submit" value="Go to Checkout Page">CHECKOUT</button>
+
+
 </form>
 </div>
 </section>
